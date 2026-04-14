@@ -9,7 +9,7 @@ phases:
       nodejs: 20
     commands:
       - cd frontend
-      - npm ci
+      - npm ci --no-audit --no-fund
   pre_build:
     commands:
       - npm run lint
