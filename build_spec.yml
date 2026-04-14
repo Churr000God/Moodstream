@@ -1,0 +1,29 @@
+version: 0.2
+
+env:
+  shell: bash
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - cd frontend
+      - npm ci
+  pre_build:
+    commands:
+      - npm run lint
+      - npm run typecheck
+  build:
+    commands:
+      - npm run build
+      - cd ..
+      - docker build -t moodstream-frontend-img ./frontend
+
+artifacts:
+  files:
+    - frontend/dist/**/*
+
+cache:
+  paths:
+    - /root/.npm/**/*

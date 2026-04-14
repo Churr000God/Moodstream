@@ -8,38 +8,38 @@ Lista práctica de comandos que se usan durante el desarrollo y despliegue del p
 
 ### Estado y cambios
 ```bash
-git status
-git diff
-git diff --staged
-git log --oneline --decorate -n 20
+git status /** para ver estado */
+git diff /** para ver cambios */
+git diff --staged /** para ver cambios en el índice */
+git log --oneline --decorate -n 20 /** para ver últimos commits */
 ```
 
 ### Ramas
 ```bash
-git branch
-git checkout -b feature/mi-rama
-git checkout main
-git pull
+git branch /** para ver ramas */
+git checkout -b feature/mi-rama /** para crear una nueva rama */
+git checkout main /** para actualizar main */
+git pull /** para obtener cambios de GitHub */
 ```
 
 ### Commits
 ```bash
-git add <archivo|carpeta>
-git commit -m "feat(frontend): ..."
+git add <archivo|carpeta> /** para agregar cambios al índice */
+git commit -m "feat(frontend): ..." /** para crear un commit */
 ```
 
 ### Subir cambios
 ```bash
-git push -u origin feature/mi-rama
-git push
+git push -u origin feature/mi-rama /** para subir cambios a GitHub  en la rama actual */
+git push /** para actualizar GitHub */
 ```
 
 ### Deshacer (higiene)
 ```bash
-git restore <archivo>
-git restore --staged <archivo>
-git reset --soft HEAD~1
-git reset --hard HEAD~1
+git restore <archivo> /** para restaurar archivo */
+git restore --staged <archivo> /** para restaurar archivo en el índice */   
+git reset --soft HEAD~1 /** para restaurar commit */
+git reset --hard HEAD~1 /** para restaurar commit y índice */
 ```
 
 ---
