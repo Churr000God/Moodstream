@@ -4,6 +4,29 @@ Lista práctica de comandos que se usan durante el desarrollo y despliegue del p
 
 ---
 
+## Conceptos clave (Git)
+
+### Repositorio
+Un repositorio es la carpeta del proyecto con historial de cambios. Contiene:
+- el código y archivos del proyecto
+- la carpeta oculta `.git/` con el historial, ramas y referencias
+
+En este proyecto, `Moodstream/` es el repositorio. Los comandos `git status`, `git log`, `git diff` trabajan sobre este repositorio.
+
+### Índice (staging area)
+El índice es un “área intermedia” entre tu carpeta de trabajo (working directory) y el historial (commits).
+- `git add ...` copia los cambios seleccionados al índice
+- `git commit ...` crea un commit usando lo que esté en el índice
+- `git diff` muestra cambios sin preparar (working directory)
+- `git diff --staged` muestra lo que ya está en el índice y se irá al próximo commit
+
+### Rama (branch)
+Una rama es una línea independiente de trabajo (un puntero a una secuencia de commits).
+- `main` suele ser la rama estable
+- `feature/...` se usa para desarrollar una funcionalidad sin romper `main`
+
+`git checkout -b feature/mi-rama` crea una rama nueva y cambia a ella.
+
 ## Git (local)
 
 ### Estado y cambios
@@ -54,40 +77,64 @@ git reset --hard HEAD~1 /** para restaurar commit y índice */
 
 ## Docker (local o EC2)
 
+## Conceptos clave (Docker)
+
+### Imagen
+Una imagen es un “paquete” inmutable con todo lo necesario para correr un servicio (archivos + dependencias + configuración base).
+- Se construye con `docker build ...` usando un `Dockerfile`.
+
+### Contenedor
+Un contenedor es una instancia en ejecución (o detenida) de una imagen.
+- `docker run ...` crea y arranca un contenedor desde una imagen.
+- `docker ps` lista contenedores corriendo; `docker ps -a` incluye detenidos.
+- `docker logs ...` muestra la salida del contenedor (lo que la app escribe a stdout/stderr).
+
+### Puertos
+El mapeo `-p 80:80` significa:
+- puerto 80 del host (EC2) → puerto 80 dentro del contenedor
+Si cambias el puerto del host, el contenedor puede seguir escuchando en 80 internamente.
+
+### Redes (networks)
+Docker conecta contenedores mediante redes. La red por defecto suele ser `bridge`.
+- Una red Docker NO es lo mismo que una “subred” (subnet) de AWS, pero se relacionan:
+  - AWS Subnet: segmento de red de tu VPC (infra de AWS).
+  - Docker Network: red virtual dentro del host (la instancia EC2).
+
+En este proyecto (por ahora) el frontend corre como un único contenedor, por eso los comandos se enfocan en build/run/logs. Si luego agregas backend + db en contenedores, aparecerán comandos como `docker network create` y `docker compose`.
+
 ### Inspección
 ```bash
-docker --version
-docker ps
-docker ps -a
-docker image ls
-docker system df
+docker --version /** para ver versión */
+docker ps /** para ver contenedores actuales */
+docker ps -a /** para ver todos los contenedores */
+docker system df /** para ver espacio en disco */
 ```
 
 ### Build + Run (frontend)
 ```bash
-docker build -t moodstream-frontend-img ./frontend
-docker run -d --name moodstream-frontend -p 80:80 --restart unless-stopped moodstream-frontend-img
+docker build -t moodstream-frontend-img ./frontend /** para construir imagen de frontend */
+docker run -d --name moodstream-frontend -p 80:80 --restart unless-stopped moodstream-frontend-img /** para iniciar contenedor de frontend */
 ```
 
 ### Logs y operación
 ```bash
-docker logs --tail 100 moodstream-frontend
-docker stop moodstream-frontend
-docker rm moodstream-frontend
+docker logs --tail 100 moodstream-frontend /** para ver logs de frontend */
+docker stop moodstream-frontend /** para detener frontend */
+docker rm moodstream-frontend /** para eliminar frontend */
 ```
 
 ### Limpieza
 ```bash
-docker image prune -f
+docker image prune -f /** para eliminar imágenes no utilizadas */
 ```
 
 ---
 
 ## EC2 Ubuntu/Debian (Docker)
 ```bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y docker.io docker-compose-v2 curl
-sudo systemctl enable --now docker
+sudo apt update && sudo apt upgrade -y /** para actualizar sistema */
+sudo apt install -y docker.io docker-compose-v2 curl /** para instalar Docker y Compose */
+sudo systemctl enable --now docker /** para iniciar Docker */
 ```
 
 ---
@@ -99,8 +146,8 @@ Ubicación: `scripts/aws/`
 ```bash
 chmod +x scripts/aws/*.sh
 
-./scripts/aws/01-deploy.sh
-./scripts/aws/02-update.sh
-./scripts/aws/03-fetch-logs.sh
+./scripts/aws/01-deploy.sh /** para desplegar el proyecto */
+./scripts/aws/02-update.sh /** para actualizar el proyecto */
+./scripts/aws/03-fetch-logs.sh /** para obtener logs de AWS */
 ```
 
