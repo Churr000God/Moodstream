@@ -1,0 +1,1042 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg0: #0A090E;
+    --bg1: #111019;
+    --bg2: #18162280;
+    --surface: #1C1A2A;
+    --surface2: #242238;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #EAE8F4;
+    --text2: #9B97B8;
+    --text3: #5E5A7A;
+    --accent: #8B6FE8;
+    --accent2: #C49DFF;
+    --accent3: #5044A8;
+    --glow: rgba(139,111,232,0.18);
+    --coral: #E87B6A;
+    --teal: #5DC9B8;
+    --amber: #E8B86A;
+    --success: #5DC98B;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg0);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .nav {
+    display: flex;
+    gap: 6px;
+    padding: 20px 24px 0;
+    flex-wrap: wrap;
+  }
+  .nav-btn {
+    padding: 7px 14px;
+    border: 0.5px solid var(--border2);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text2);
+    font-family: var(--sans);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { border-color: var(--accent); color: var(--accent2); }
+  .nav-btn.active { background: var(--accent3); border-color: var(--accent); color: var(--accent2); }
+
+  .screen { display: none; padding: 24px; animation: fadeIn 0.3s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+
+  h1 { font-family: var(--serif); font-size: 32px; font-weight: 400; line-height: 1.15; color: var(--text); }
+  h2 { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--text); }
+  h3 { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+  p { color: var(--text2); font-size: 13px; line-height: 1.7; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 0.5px solid;
+  }
+  .tag-purple { background: rgba(139,111,232,0.12); border-color: rgba(139,111,232,0.3); color: var(--accent2); }
+  .tag-teal { background: rgba(93,201,184,0.12); border-color: rgba(93,201,184,0.3); color: var(--teal); }
+  .tag-coral { background: rgba(232,123,106,0.12); border-color: rgba(232,123,106,0.3); color: var(--coral); }
+  .tag-amber { background: rgba(232,184,106,0.12); border-color: rgba(232,184,106,0.3); color: var(--amber); }
+
+  .card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .card-sm {
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+  }
+
+  .divider {
+    height: 0.5px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  .color-swatch {
+    height: 52px;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-end;
+    padding: 8px 10px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #9E82F0; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(139,111,232,0.3); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: transparent;
+    color: var(--text2);
+    border: 0.5px solid var(--border2);
+    border-radius: 100px;
+    font-family: var(--sans);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+
+  .btn-deezer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    background: #A238F0;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .input-field {
+    width: 100%;
+    background: var(--surface2);
+    border: 0.5px solid var(--border2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139,111,232,0.1); }
+  .input-field::placeholder { color: var(--text3); }
+
+  .mood-chip {
+    padding: 8px 16px;
+    border-radius: 100px;
+    background: var(--surface2);
+    border: 0.5px solid var(--border2);
+    color: var(--text2);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    margin: 4px;
+  }
+  .mood-chip:hover, .mood-chip.selected {
+    background: rgba(139,111,232,0.15);
+    border-color: var(--accent);
+    color: var(--accent2);
+  }
+
+  .track-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    transition: background 0.15s;
+  }
+  .track-item:hover { background: var(--surface2); }
+  .track-thumb {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .limit-bar {
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 100px;
+    overflow: hidden;
+    margin: 6px 0;
+  }
+  .limit-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+    transition: width 0.6s ease;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .step-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent3);
+    border: 0.5px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent2);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 12px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-label { color: var(--text3); }
+  .spec-val { color: var(--text); font-weight: 500; font-family: monospace; font-size: 11px; }
+
+  .glow-orb {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    filter: blur(40px);
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+
+  .hero-mockup {
+    position: relative;
+    background: var(--bg1);
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .hero-mockup::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(139,111,232,0.12);
+    filter: blur(50px);
+    pointer-events: none;
+  }
+  .hero-mockup::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(93,201,184,0.08);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .copy-line { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+  .copy-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); min-width: 70px; margin-top: 2px; }
+  .copy-text { font-size: 12px; color: var(--text2); flex: 1; }
+  .copy-text em { font-style: normal; color: var(--text); font-weight: 500; }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .component-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--surface2);
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: monospace;
+    color: var(--accent2);
+    border: 0.5px solid rgba(139,111,232,0.2);
+    margin: 3px;
+  }
+
+  .ux-tip {
+    padding: 12px 14px;
+    background: rgba(93,201,184,0.06);
+    border-left: 2px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .ux-tip strong { color: var(--teal); font-weight: 500; }
+
+  .warning-tip {
+    padding: 12px 14px;
+    background: rgba(232,184,106,0.06);
+    border-left: 2px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .warning-tip strong { color: var(--amber); font-weight: 500; }
+
+  .screen-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    border: 0.5px solid rgba(139,111,232,0.2);
+    background: rgba(139,111,232,0.07);
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  .resp-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 12px;
+    align-items: start;
+  }
+  .resp-row:last-child { border-bottom: none; }
+
+  textarea.input-field { resize: vertical; min-height: 80px; }
+</style>
+
+<div class="nav" id="nav">
+  <button class="nav-btn active" onclick="show('concept')">1. Concepto visual</button>
+  <button class="nav-btn" onclick="show('flow')">2. Flujo UX</button>
+  <button class="nav-btn" onclick="show('screens')">3. Pantallas</button>
+  <button class="nav-btn" onclick="show('design')">4. Design system</button>
+  <button class="nav-btn" onclick="show('copy')">5. Copy</button>
+  <button class="nav-btn" onclick="show('components')">6. Componentes</button>
+  <button class="nav-btn" onclick="show('ux')">7. Recomendaciones UX</button>
+  <button class="nav-btn" onclick="show('extras')">8. Extras</button>
+</div>
+
+<!-- ====== CONCEPT ====== -->
+<div class="screen active" id="screen-concept">
+  <div class="hero-mockup">
+    <div style="margin-bottom:8px;"><span class="tag tag-purple">Concepto visual</span></div>
+    <h1 style="font-size:36px; margin-bottom:10px;">Liquid Dark Ambient</h1>
+    <p style="font-size:14px; max-width:480px; margin-bottom:20px;">Moodstream vive en el espacio entre la emoción y la música. Su estética debe sentirse como estar en un cuarto oscuro con la música perfecta: seguro, íntimo, transformador.</p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <span class="tag tag-purple">Introspección</span>
+      <span class="tag tag-teal">Calma activa</span>
+      <span class="tag tag-coral">Emoción honesta</span>
+      <span class="tag tag-amber">Confianza cálida</span>
+    </div>
+  </div>
+
+  <h3>Pilares estéticos</h3>
+  <div class="grid2">
+    <div class="card-sm">
+      <div style="font-size:20px;margin-bottom:6px;">🌑</div>
+      <p style="color:var(--text);font-weight:500;font-size:13px;margin-bottom:4px;">Oscuridad inmersiva</p>
+      <p>Fondo casi negro (#0A090E) con superficies en capas de gris-morado. El color emerge con propósito, no como decoración.</p>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:20px;margin-bottom:6px;">✦</div>
+      <p style="color:var(--text);font-weight:500;font-size:13px;margin-bottom:4px;">Acento luminoso</p>
+      <p>Púrpura violeta (#8B6FE8) como color de acción. Teal y coral para estados emocionales. Nunca gratuito.</p>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:20px;margin-bottom:6px;">Aa</div>
+      <p style="color:var(--text);font-weight:500;font-size:13px;margin-bottom:4px;">Tipografía editorial</p>
+      <p>DM Serif Display para títulos grandes con carga emocional. DM Sans ligero y limpio para el cuerpo.</p>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:20px;margin-bottom:6px;">◌</div>
+      <p style="color:var(--text);font-weight:500;font-size:13px;margin-bottom:4px;">Respiración espacial</p>
+      <p>Bordes redondeados generosos (16–24px). Mucho espacio negativo. Los elementos no compiten; coexisten.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>Alineación con el propósito</h3>
+  <div class="card">
+    <div class="flow-step">
+      <div class="step-num">→</div>
+      <div>
+        <p style="color:var(--text);font-size:13px;font-weight:500;">Expresar emociones</p>
+        <p>Colores saturados fríos (púrpura, índigo). Tipografía serif amplia. Sensación de validar lo que sientes.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">↑</div>
+      <div>
+        <p style="color:var(--text);font-size:13px;font-weight:500;">Superar emociones</p>
+        <p>Transición a teal y colores cálidos en el resultado. El UI acompaña visualmente la transformación.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">♩</div>
+      <div>
+        <p style="color:var(--text);font-size:13px;font-weight:500;">La música como destino</p>
+        <p>La interfaz desaparece cuando aparece la playlist. El resultado es el protagonista, no el formulario.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== FLOW ====== -->
+<div class="screen" id="screen-flow">
+  <div class="screen-label">Flujo principal del usuario</div>
+  <h2 style="margin-bottom:6px;">Del mood a la playlist</h2>
+  <p style="margin-bottom:20px;">5 pasos desde la primera visita hasta escuchar música generada para su estado emocional.</p>
+
+  <div class="card">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p style="color:var(--text);font-size:13px;font-weight:500;">Landing page</p>
+          <span class="tag tag-purple">RF01</span>
+        </div>
+        <p style="margin-top:3px;">Usuario llega. Lee el valor del producto. Decide registrarse o iniciar sesión con cuenta existente.</p>
+        <div style="margin-top:8px;display:flex;gap:6px;">
+          <button class="btn-primary" style="font-size:11px;padding:6px 14px;">Comenzar gratis</button>
+          <button class="btn-ghost" style="font-size:11px;padding:5px 14px;">Ya tengo cuenta</button>
+        </div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p style="color:var(--text);font-size:13px;font-weight:500;">Registro / Login</p>
+          <span class="tag tag-purple">RF01</span>
+        </div>
+        <p style="margin-top:3px;">Formulario mínimo (email + contraseña) o OAuth social. Sin burocracia. Onboarding inmediato tras completar.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p style="color:var(--text);font-size:13px;font-weight:500;">Conectar Deezer</p>
+          <span class="tag tag-teal">RF02</span>
+        </div>
+        <p style="margin-top:3px;">Pantalla de onboarding explicando por qué necesitas conectar Deezer. Botón OAuth claro y seguro.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p style="color:var(--text);font-size:13px;font-weight:500;">Captura de mood</p>
+          <span class="tag tag-coral">RF03 / RF04</span>
+        </div>
+        <p style="margin-top:3px;">Formulario guiado en pasos. Primero: ¿cómo te sientes? (selector emocional). Segundo: ¿expresar o superar? Tercero: describe en texto libre.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">5</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p style="color:var(--text);font-size:13px;font-weight:500;">Resultado + guardado</p>
+          <span class="tag tag-amber">RF05 / RF06</span>
+        </div>
+        <p style="margin-top:3px;">Playlist generada con preview de tracks. Botón para guardar directo en Deezer. Contador de límite diario visible.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Pantallas del MVP</h3>
+  <div class="grid2">
+    <div class="card-sm"><p style="color:var(--text);font-size:12px;font-weight:500;">Landing</p><p style="font-size:11px;">Hero + valor + CTA + features</p></div>
+    <div class="card-sm"><p style="color:var(--text);font-size:12px;font-weight:500;">Auth</p><p style="font-size:11px;">Login + Registro unificados</p></div>
+    <div class="card-sm"><p style="color:var(--text);font-size:12px;font-weight:500;">Onboarding Deezer</p><p style="font-size:11px;">Confianza + OAuth</p></div>
+    <div class="card-sm"><p style="color:var(--text);font-size:12px;font-weight:500;">Mood capture</p><p style="font-size:11px;">Formulario 3 pasos</p></div>
+    <div class="card-sm"><p style="color:var(--text);font-size:12px;font-weight:500;">Resultado playlist</p><p style="font-size:11px;">Preview + guardar en Deezer</p></div>
+    <div class="card-sm"><p style="color:var(--text);font-size:12px;font-weight:500;">Perfil / ajustes</p><p style="font-size:11px;">Cuenta + historial básico</p></div>
+  </div>
+</div>
+
+<!-- ====== SCREENS ====== -->
+<div class="screen" id="screen-screens">
+  <div id="screen-tabs" style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;">
+    <button class="nav-btn active" onclick="showScreen('landing')">Landing</button>
+    <button class="nav-btn" onclick="showScreen('auth')">Login / Registro</button>
+    <button class="nav-btn" onclick="showScreen('deezer')">Conectar Deezer</button>
+    <button class="nav-btn" onclick="showScreen('mood')">Mood capture</button>
+    <button class="nav-btn" onclick="showScreen('result')">Resultado</button>
+  </div>
+
+  <!-- Landing -->
+  <div id="scr-landing">
+    <div class="hero-mockup" style="text-align:center;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">MOODSTREAM</div>
+      <h1 style="font-size:30px;margin-bottom:12px;">La música que necesitas,<br><em style="font-style:italic;color:var(--accent2);">en el momento exacto</em></h1>
+      <p style="font-size:14px;max-width:340px;margin:0 auto 24px;">Cuéntanos cómo te sientes. Nosotros encontramos la playlist perfecta en Deezer.</p>
+      <button class="btn-primary" style="margin-bottom:10px;">Generar mi playlist</button>
+      <p style="font-size:11px;color:var(--text3);">Gratis · Requiere cuenta Deezer</p>
+    </div>
+    <h3>Sección features</h3>
+    <div class="grid3">
+      <div class="card-sm" style="text-align:center;">
+        <div style="font-size:22px;margin-bottom:8px;">🎭</div>
+        <p style="color:var(--text);font-size:12px;font-weight:500;margin-bottom:4px;">Entiende tu mood</p>
+        <p style="font-size:11px;">Describe cómo te sientes en tus palabras.</p>
+      </div>
+      <div class="card-sm" style="text-align:center;">
+        <div style="font-size:22px;margin-bottom:8px;">✨</div>
+        <p style="color:var(--text);font-size:12px;font-weight:500;margin-bottom:4px;">IA emocional</p>
+        <p style="font-size:11px;">Clasificamos tu emoción y elegimos la energía correcta.</p>
+      </div>
+      <div class="card-sm" style="text-align:center;">
+        <div style="font-size:22px;margin-bottom:8px;">🎵</div>
+        <p style="color:var(--text);font-size:12px;font-weight:500;margin-bottom:4px;">En Deezer</p>
+        <p style="font-size:11px;">Guardada directo en tu cuenta, lista para escuchar.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="text-align:center;padding:10px 0;">
+      <p style="font-size:12px;color:var(--text3);">Footer · Privacy · Términos · @moodstream</p>
+    </div>
+  </div>
+
+  <!-- Auth -->
+  <div id="scr-auth" style="display:none">
+    <div class="card" style="max-width:340px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">MOODSTREAM</div>
+        <h2 style="font-size:20px;">Bienvenido de vuelta</h2>
+        <p style="font-size:12px;margin-top:4px;">¿Primera vez? <span style="color:var(--accent2);cursor:pointer;">Crea tu cuenta</span></p>
+      </div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:11px;color:var(--text3);display:block;margin-bottom:5px;">Correo electrónico</label>
+        <input class="input-field" type="email" placeholder="tu@correo.com" />
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:11px;color:var(--text3);display:block;margin-bottom:5px;">Contraseña</label>
+        <input class="input-field" type="password" placeholder="••••••••" />
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center;margin-bottom:10px;">Entrar</button>
+      <div style="text-align:center;font-size:11px;color:var(--text3);">¿Olvidaste tu contraseña?</div>
+      <div style="display:flex;align-items:center;gap:10px;margin:14px 0;">
+        <div style="flex:1;height:0.5px;background:var(--border);"></div>
+        <span style="font-size:11px;color:var(--text3);">o continúa con</span>
+        <div style="flex:1;height:0.5px;background:var(--border);"></div>
+      </div>
+      <button class="btn-ghost" style="width:100%;justify-content:center;">Google</button>
+    </div>
+  </div>
+
+  <!-- Deezer -->
+  <div id="scr-deezer" style="display:none">
+    <div class="card" style="max-width:360px;margin:0 auto;text-align:center;">
+      <div style="font-size:40px;margin-bottom:12px;">🎧</div>
+      <h2 style="font-size:20px;margin-bottom:8px;">Conecta tu Deezer</h2>
+      <p style="font-size:13px;margin-bottom:20px;">Para guardar tus playlists necesitamos acceso a tu cuenta. Solo pedimos lo necesario.</p>
+      <div class="card-sm" style="text-align:left;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span style="color:var(--success);font-size:14px;">✓</span>
+          <p style="font-size:12px;">Crear playlists en tu nombre</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span style="color:var(--success);font-size:14px;">✓</span>
+          <p style="font-size:12px;">Ver tu biblioteca básica</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="color:var(--coral);font-size:14px;">✗</span>
+          <p style="font-size:12px;">No leemos tus datos financieros ni historial de escucha</p>
+        </div>
+      </div>
+      <button class="btn-deezer" style="width:100%;justify-content:center;">Conectar con Deezer</button>
+      <p style="font-size:11px;color:var(--text3);margin-top:10px;">Redireccionarás a Deezer de forma segura. Puedes desconectar en cualquier momento.</p>
+    </div>
+  </div>
+
+  <!-- Mood -->
+  <div id="scr-mood" style="display:none">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div>
+          <p style="font-size:11px;color:var(--text3);margin-bottom:2px;">Paso 1 de 3</p>
+          <h2 style="font-size:18px;">¿Cómo te sientes ahora?</h2>
+        </div>
+        <div class="limit-bar" style="width:80px;">
+          <div class="limit-fill" style="width:33%;"></div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Elige lo que más se acerca, puedes seleccionar varios</p>
+      <div class="pill-row">
+        <span class="mood-chip selected">😔 Triste</span>
+        <span class="mood-chip">😰 Ansioso</span>
+        <span class="mood-chip">😠 Enojado</span>
+        <span class="mood-chip">😮‍💨 Agotado</span>
+        <span class="mood-chip">😌 Tranquilo</span>
+        <span class="mood-chip">🙁 Nostálgico</span>
+        <span class="mood-chip">😕 Perdido</span>
+        <span class="mood-chip">✨ Esperanzado</span>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;color:var(--text2);margin-bottom:8px;">¿Quieres agregar algo más?</p>
+      <textarea class="input-field" placeholder="Hoy me siento… (opcional)" style="height:70px;"></textarea>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px;">
+        <button class="btn-primary">Siguiente →</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:0;">
+      <p style="font-size:11px;color:var(--text3);margin-bottom:2px;">Paso 2 de 3</p>
+      <h2 style="font-size:18px;margin-bottom:14px;">¿Qué necesitas de la música hoy?</h2>
+      <div class="grid2">
+        <div class="card-sm" style="cursor:pointer;border-color:var(--accent);background:rgba(139,111,232,0.08);">
+          <div style="font-size:22px;margin-bottom:6px;">🌊</div>
+          <p style="color:var(--accent2);font-size:13px;font-weight:500;margin-bottom:4px;">Expresar lo que siento</p>
+          <p style="font-size:11px;">Música que acompañe y valide tu emoción tal como está.</p>
+        </div>
+        <div class="card-sm" style="cursor:pointer;">
+          <div style="font-size:22px;margin-bottom:6px;">🌅</div>
+          <p style="color:var(--text);font-size:13px;font-weight:500;margin-bottom:4px;">Superar y avanzar</p>
+          <p style="font-size:11px;">Música que te eleve y te ayude a salir del estado actual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div id="scr-result" style="display:none">
+    <div class="hero-mockup">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+        <div>
+          <span class="tag tag-purple" style="margin-bottom:8px;display:inline-block;">Listo para escuchar</span>
+          <h2 style="font-size:20px;">Tu playlist de hoy</h2>
+          <p style="font-size:12px;margin-top:3px;">Para cuando la tristeza pide compañía · 12 canciones</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-size:10px;color:var(--text3);">Playlists hoy</p>
+          <p style="font-size:13px;color:var(--text);font-weight:500;">2 / 5</p>
+          <div class="limit-bar" style="width:60px;margin-top:4px;">
+            <div class="limit-fill" style="width:40%;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <div class="track-item">
+          <div class="track-thumb" style="background:rgba(139,111,232,0.2);">🎵</div>
+          <div style="flex:1;">
+            <p style="font-size:13px;color:var(--text);font-weight:500;">The Night Will Always Win</p>
+            <p style="font-size:11px;color:var(--text3);">Manchester Orchestra</p>
+          </div>
+          <p style="font-size:11px;color:var(--text3);">3:42</p>
+        </div>
+        <div class="track-item">
+          <div class="track-thumb" style="background:rgba(93,201,184,0.15);">🎵</div>
+          <div style="flex:1;">
+            <p style="font-size:13px;color:var(--text);font-weight:500;">Slow Burn</p>
+            <p style="font-size:11px;color:var(--text3);">Kacey Musgraves</p>
+          </div>
+          <p style="font-size:11px;color:var(--text3);">3:59</p>
+        </div>
+        <div class="track-item">
+          <div class="track-thumb" style="background:rgba(232,123,106,0.15);">🎵</div>
+          <div style="flex:1;">
+            <p style="font-size:13px;color:var(--text);font-weight:500;">River</p>
+            <p style="font-size:11px;color:var(--text3);">Leon Bridges</p>
+          </div>
+          <p style="font-size:11px;color:var(--text3);">4:11</p>
+        </div>
+        <div class="track-item" style="opacity:0.4;">
+          <div class="track-thumb" style="background:var(--surface2);">+9</div>
+          <p style="font-size:12px;color:var(--text2);">y 9 canciones más...</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-deezer">Guardar en Deezer</button>
+        <button class="btn-ghost">Nueva playlist</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DESIGN SYSTEM ====== -->
+<div class="screen" id="screen-design">
+  <div class="screen-label">Design system</div>
+
+  <h3>Paleta de colores</h3>
+  <div class="grid3" style="margin-bottom:16px;">
+    <div>
+      <div class="color-swatch" style="background:#0A090E;border:0.5px solid var(--border)"><span style="color:var(--text3);font-size:10px;">#0A090E</span></div>
+      <p style="font-size:11px;margin-top:4px;color:var(--text2);">bg-base</p>
+    </div>
+    <div>
+      <div class="color-swatch" style="background:#1C1A2A;"><span style="color:#5E5A7A;font-size:10px;">#1C1A2A</span></div>
+      <p style="font-size:11px;margin-top:4px;color:var(--text2);">surface</p>
+    </div>
+    <div>
+      <div class="color-swatch" style="background:#8B6FE8;"><span style="color:#EAE8F4;font-size:10px;">#8B6FE8</span></div>
+      <p style="font-size:11px;margin-top:4px;color:var(--text2);">accent</p>
+    </div>
+    <div>
+      <div class="color-swatch" style="background:#C49DFF;"><span style="color:#2D1F5E;font-size:10px;">#C49DFF</span></div>
+      <p style="font-size:11px;margin-top:4px;color:var(--text2);">accent-light</p>
+    </div>
+    <div>
+      <div class="color-swatch" style="background:#5DC9B8;"><span style="color:#04342C;font-size:10px;">#5DC9B8</span></div>
+      <p style="font-size:11px;margin-top:4px;color:var(--text2);">teal (superar)</p>
+    </div>
+    <div>
+      <div class="color-swatch" style="background:#E87B6A;"><span style="color:#4A1B0C;font-size:10px;">#E87B6A</span></div>
+      <p style="font-size:11px;margin-top:4px;color:var(--text2);">coral (expresar)</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Tipografía</h3>
+  <div class="card">
+    <div class="spec-row">
+      <span class="spec-label">Display / Títulos emocionales</span>
+      <span class="spec-val">DM Serif Display</span>
+    </div>
+    <div class="spec-row">
+      <span class="spec-label">Body / UI / Botones</span>
+      <span class="spec-val">DM Sans</span>
+    </div>
+    <div class="spec-row">
+      <span class="spec-label">h1 hero</span>
+      <span class="spec-val">36–48px / 400</span>
+    </div>
+    <div class="spec-row">
+      <span class="spec-label">h2 pantalla</span>
+      <span class="spec-val">22–28px / 400</span>
+    </div>
+    <div class="spec-row">
+      <span class="spec-label">Body</span>
+      <span class="spec-val">14px / 400 / 1.7</span>
+    </div>
+    <div class="spec-row">
+      <span class="spec-label">Labels / Caps</span>
+      <span class="spec-val">11px / 600 / 0.1em</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Botones</h3>
+  <div class="pill-row" style="gap:10px;">
+    <button class="btn-primary">Generar playlist</button>
+    <button class="btn-ghost">Cancelar</button>
+    <button class="btn-deezer">Guardar en Deezer</button>
+  </div>
+  <div class="card-sm" style="margin-top:10px;">
+    <div class="spec-row"><span class="spec-label">Primary</span><span class="spec-val">bg #8B6FE8 · radius 100px · 11–13px</span></div>
+    <div class="spec-row"><span class="spec-label">Ghost</span><span class="spec-val">border 0.5px #border2 · transparent bg</span></div>
+    <div class="spec-row"><span class="spec-label">Deezer</span><span class="spec-val">bg #A238F0 · brand color</span></div>
+    <div class="spec-row"><span class="spec-label">Hover</span><span class="spec-val">translateY(-1px) + box-shadow glow</span></div>
+    <div class="spec-row"><span class="spec-label">Disabled</span><span class="spec-val">opacity: 0.4 · cursor: not-allowed</span></div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Radios y espaciado</h3>
+  <div class="card">
+    <div class="spec-row"><span class="spec-label">Border radius · cards</span><span class="spec-val">16px</span></div>
+    <div class="spec-row"><span class="spec-label">Border radius · inputs</span><span class="spec-val">10px</span></div>
+    <div class="spec-row"><span class="spec-label">Border radius · chips/btns</span><span class="spec-val">100px (pill)</span></div>
+    <div class="spec-row"><span class="spec-label">Border radius · hero cards</span><span class="spec-val">20–24px</span></div>
+    <div class="spec-row"><span class="spec-label">Padding card</span><span class="spec-val">20–24px</span></div>
+    <div class="spec-row"><span class="spec-label">Gap base</span><span class="spec-val">12px</span></div>
+    <div class="spec-row"><span class="spec-label">Border width</span><span class="spec-val">0.5px solid rgba(255,255,255,0.07)</span></div>
+  </div>
+</div>
+
+<!-- ====== COPY ====== -->
+<div class="screen" id="screen-copy">
+  <div class="screen-label">Copy de la interfaz</div>
+  <p style="margin-bottom:16px;">Tono: empático, directo, íntimo. Como un amigo que entiende de música y de emociones. Sin tecnicismos, sin frialdad.</p>
+
+  <h3>Landing page</h3>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="copy-line"><span class="copy-label">Hero H1</span><span class="copy-text"><em>"La música que necesitas, en el momento exacto"</em></span></div>
+    <div class="copy-line"><span class="copy-label">Subtítulo</span><span class="copy-text">Cuéntanos cómo te sientes. Nosotros encontramos la playlist perfecta en Deezer.</span></div>
+    <div class="copy-line"><span class="copy-label">CTA</span><span class="copy-text"><em>"Generar mi playlist"</em> · alternativa: <em>"Empieza gratis"</em></span></div>
+    <div class="copy-line"><span class="copy-label">Subtexto CTA</span><span class="copy-text">Gratis · Requiere cuenta Deezer</span></div>
+  </div>
+
+  <h3>Mood capture</h3>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="copy-line"><span class="copy-label">Paso 1</span><span class="copy-text"><em>"¿Cómo te sientes ahora mismo?"</em></span></div>
+    <div class="copy-line"><span class="copy-label">Placeholder</span><span class="copy-text">Hoy me siento… (en tus palabras, sin filtro)</span></div>
+    <div class="copy-line"><span class="copy-label">Paso 2</span><span class="copy-text"><em>"¿Qué necesitas de la música hoy?"</em></span></div>
+    <div class="copy-line"><span class="copy-label">Expresar</span><span class="copy-text">Música que acompañe y valide tu emoción tal como está</span></div>
+    <div class="copy-line"><span class="copy-label">Superar</span><span class="copy-text">Música que te eleve y te ayude a avanzar</span></div>
+    <div class="copy-line"><span class="copy-label">Paso 3</span><span class="copy-text"><em>"¿Hay algo más que quieras que sepamos?"</em></span></div>
+  </div>
+
+  <h3>Deezer onboarding</h3>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="copy-line"><span class="copy-label">Título</span><span class="copy-text"><em>"Un último paso: conecta Deezer"</em></span></div>
+    <div class="copy-line"><span class="copy-label">Subtítulo</span><span class="copy-text">Solo pedimos acceso para crear playlists. Nada más.</span></div>
+    <div class="copy-line"><span class="copy-label">CTA</span><span class="copy-text"><em>"Conectar con Deezer"</em> (botón marca Deezer)</span></div>
+    <div class="copy-line"><span class="copy-label">Micro</span><span class="copy-text">Redireccionarás a Deezer. Puedes desconectar cuando quieras.</span></div>
+  </div>
+
+  <h3>Resultado playlist</h3>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="copy-line"><span class="copy-label">Título</span><span class="copy-text"><em>"Tu playlist de hoy"</em></span></div>
+    <div class="copy-line"><span class="copy-label">Subtítulo dinámico</span><span class="copy-text">Para cuando la tristeza pide compañía · 12 canciones</span></div>
+    <div class="copy-line"><span class="copy-label">CTA guardar</span><span class="copy-text"><em>"Guardar en Deezer"</em></span></div>
+    <div class="copy-line"><span class="copy-label">Éxito</span><span class="copy-text">Playlist guardada en tu Deezer. ¡A escuchar!</span></div>
+    <div class="copy-line"><span class="copy-label">Error</span><span class="copy-text">No pudimos guardar la playlist. Intenta de nuevo.</span></div>
+  </div>
+
+  <h3>Límite diario</h3>
+  <div class="card">
+    <div class="copy-line"><span class="copy-label">Normal</span><span class="copy-text">Playlists hoy: <em>2 de 5</em></span></div>
+    <div class="copy-line"><span class="copy-label">Último</span><span class="copy-text">Esta es tu última playlist del día. ¡Que sea especial.</span></div>
+    <div class="copy-line"><span class="copy-label">Límite</span><span class="copy-text">Ya generaste tus 5 playlists de hoy. Vuelve mañana con tu próximo mood.</span></div>
+  </div>
+</div>
+
+<!-- ====== COMPONENTS ====== -->
+<div class="screen" id="screen-components">
+  <div class="screen-label">Componentes React</div>
+  <p style="margin-bottom:16px;">Componentes atómicos y de composición para el MVP. Todos usan CSS variables para soportar modo claro/oscuro.</p>
+
+  <h3>Átomos</h3>
+  <div style="margin-bottom:14px;">
+    <div class="component-badge">&lt;MoodChip /&gt;</div>
+    <div class="component-badge">&lt;Button variant="primary|ghost|deezer" /&gt;</div>
+    <div class="component-badge">&lt;Tag color="purple|teal|coral" /&gt;</div>
+    <div class="component-badge">&lt;Input /&gt;</div>
+    <div class="component-badge">&lt;Textarea /&gt;</div>
+    <div class="component-badge">&lt;ProgressBar /&gt;</div>
+    <div class="component-badge">&lt;LimitCounter current max /&gt;</div>
+    <div class="component-badge">&lt;Divider /&gt;</div>
+  </div>
+
+  <h3>Moléculas</h3>
+  <div style="margin-bottom:14px;">
+    <div class="component-badge">&lt;TrackItem /&gt;</div>
+    <div class="component-badge">&lt;IntentionCard type="express|overcome" /&gt;</div>
+    <div class="component-badge">&lt;MoodChipGroup emotions[] /&gt;</div>
+    <div class="component-badge">&lt;DeezerConnectCard /&gt;</div>
+    <div class="component-badge">&lt;PlaylistCard tracks name /&gt;</div>
+    <div class="component-badge">&lt;StepIndicator current total /&gt;</div>
+    <div class="component-badge">&lt;FeatureItem icon title body /&gt;</div>
+    <div class="component-badge">&lt;AuthForm mode="login|register" /&gt;</div>
+  </div>
+
+  <h3>Organismos / Páginas</h3>
+  <div style="margin-bottom:14px;">
+    <div class="component-badge">&lt;LandingHero /&gt;</div>
+    <div class="component-badge">&lt;MoodCaptureWizard steps /&gt;</div>
+    <div class="component-badge">&lt;PlaylistResult /&gt;</div>
+    <div class="component-badge">&lt;DeezerOnboarding /&gt;</div>
+    <div class="component-badge">&lt;ProfileSettings /&gt;</div>
+    <div class="component-badge">&lt;AppLayout children /&gt;</div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Notas de implementación</h3>
+  <div class="card">
+    <div class="spec-row"><span class="spec-label">Estado global</span><span class="spec-val">Zustand o Context API</span></div>
+    <div class="spec-row"><span class="spec-label">Formularios</span><span class="spec-val">React Hook Form + Zod</span></div>
+    <div class="spec-row"><span class="spec-label">Animaciones</span><span class="spec-val">Framer Motion</span></div>
+    <div class="spec-row"><span class="spec-label">Routing</span><span class="spec-val">React Router v6</span></div>
+    <div class="spec-row"><span class="spec-label">HTTP</span><span class="spec-val">Axios o fetch nativo</span></div>
+    <div class="spec-row"><span class="spec-label">Estilos</span><span class="spec-val">CSS Modules o Tailwind + CSS vars</span></div>
+    <div class="spec-row"><span class="spec-label">Auth Deezer</span><span class="spec-val">OAuth popup window + callback</span></div>
+  </div>
+</div>
+
+<!-- ====== UX ====== -->
+<div class="screen" id="screen-ux">
+  <div class="screen-label">Recomendaciones UX</div>
+
+  <h3>Formulario de mood — que se sienta humano</h3>
+  <div class="ux-tip"><strong>Una pregunta a la vez:</strong> Nunca mostrar los 3 pasos en una sola pantalla. El wizard de un paso por vez reduce la carga cognitiva y hace que el usuario sienta que lo estás escuchando, no procesando.</div>
+  <div class="ux-tip"><strong>Chips emocionales primero:</strong> Empezar con selección visual (chips) antes del campo de texto. Los chips validan que sus emociones son reconocidas. El textarea es el espacio para profundizar, no para empezar.</div>
+  <div class="ux-tip"><strong>Microcopy empático:</strong> Los placeholders deben sonar como una persona real. "En tus palabras, sin filtro" > "Escribe aquí tu emoción".</div>
+  <div class="ux-tip"><strong>Animaciones de carga significativas:</strong> Durante la generación de la playlist, mostrar texto como "Escuchándote…", "Seleccionando el ritmo correcto…", "Casi lista tu playlist…" en lugar de un spinner genérico.</div>
+
+  <div class="divider"></div>
+  <h3>Reducir fricción en onboarding Deezer</h3>
+  <div class="ux-tip"><strong>Explicar antes de pedir:</strong> Antes del botón OAuth, mostrar exactamente qué permisos se solicitarán y por qué. La transparencia es la mejor estrategia de confianza.</div>
+  <div class="ux-tip"><strong>Valor primero:</strong> Permitir explorar el mood capture antes de conectar Deezer. El usuario entiende el valor antes de comprometerse. Conectar Deezer solo al momento de guardar.</div>
+
+  <div class="divider"></div>
+  <h3>Límite de 5 playlists — sin arruinar la experiencia</h3>
+  <div class="warning-tip"><strong>Nunca bloqueante hasta el final:</strong> El contador (2/5) debe ser visible pero periférico durante el flujo normal. Solo se vuelve prominente cuando quedan 1–0 playlists.</div>
+  <div class="warning-tip"><strong>Mensaje positivo al llegar al límite:</strong> "Ya generaste tus 5 playlists de hoy. Vuelve mañana con tu próximo mood." No castiga, no asusta. Invita a volver.</div>
+  <div class="warning-tip"><strong>Sin paywall agresivo en MVP:</strong> Si en el futuro hay un tier pagado, reservar el espacio visual pero no lanzarlo hasta que el producto tenga tracción.</div>
+
+  <div class="divider"></div>
+  <h3>Responsive design</h3>
+  <div class="card">
+    <div class="resp-row"><span style="color:var(--text3);">Mobile</span><span style="color:var(--text2);font-size:12px;">Stack vertical total. Chips de mood en dos columnas. Botones full-width. Font h1: 26px. Padding: 16px.</span></div>
+    <div class="resp-row"><span style="color:var(--text3);">Tablet</span><span style="color:var(--text2);font-size:12px;">Cards centradas con max-width 520px. Mood chips en wrap libre. Formulario con más espacio lateral.</span></div>
+    <div class="resp-row"><span style="color:var(--text3);">Desktop</span><span style="color:var(--text2);font-size:12px;">Max-width 960px centrado. Landing con layout de 2 columnas en features. Playlist con sidebar de info emocional.</span></div>
+  </div>
+
+  <div class="divider"></div>
+  <h3>Accesibilidad</h3>
+  <div class="card">
+    <div class="spec-row"><span class="spec-label">Contraste texto/bg</span><span class="spec-val">mín. 4.5:1 (AA)</span></div>
+    <div class="spec-row"><span class="spec-label">Focus rings</span><span class="spec-val">box-shadow 0 0 0 3px accent/30%</span></div>
+    <div class="spec-row"><span class="spec-label">Min touch target</span><span class="spec-val">44×44px</span></div>
+    <div class="spec-row"><span class="spec-label">Motion reducida</span><span class="spec-val">prefers-reduced-motion en todas las animaciones</span></div>
+    <div class="spec-row"><span class="spec-label">ARIA</span><span class="spec-val">role="status" en mensajes de carga y límite</span></div>
+    <div class="spec-row"><span class="spec-label">Font mínimo</span><span class="spec-val">12px (labels), 14px (body), 16px (inputs)</span></div>
+  </div>
+</div>
+
+<!-- ====== EXTRAS ====== -->
+<div class="screen" id="screen-extras">
+  <div class="screen-label">Microinteracciones y detalles premium</div>
+
+  <h3>Animaciones sugeridas</h3>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="flow-step">
+      <div class="step-num">✦</div>
+      <div>
+        <p style="color:var(--text);font-size:13px;font-weight:500;">Generación de playlist — loading cinético</p>
+        <p style="font-size:12px;">Orbes de color (morado, teal, coral) que pulsan y se mezclan mientras la IA procesa. Texto cambia cada 2s con frases empáticas. Duración: 3–6 segundos.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">✦</div>
+      <div>
+        <p style="color:var(--text);font-size:13px;font-weight:500;">Chips de mood — selección táctil</p>
+        <p style="font-size:12px;">Al seleccionar un chip: scale(1.05) + border glow accent + ripple suave. Al deseleccionar: regresa suavemente. No usar bounce agresivo.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">✦</div>
+      <div>
+        <p style="color:var(--text);font-size:13px;font-weight:500;">Aparición de tracks en el resultado</p>
+        <p style="font-size:12px;">Staggered entrance: cada track entra con opacity 0→1 + translateY(8px→0) con delay de 80ms por item. Máximo 5 tracks con animación, el resto aparece directo.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">✦</div>
+      <div>
+        <p style="color:var(--text);font-size:13px;font-weight:500;">Transición Expresar → Superar</p>
+        <p style="font-size:12px;">Al seleccionar "Superar", el color de acento hace una transición suave de púrpura → teal. Señal visual de que el tono emocional cambió.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">✦</div>
+      <div>
+        <p style="color:var(--text);font-size:13px;font-weight:500;">Éxito al guardar en Deezer</p>
+        <p style="font-size:12px;">Checkmark animado con stroke-dashoffset. Botón transiciona de "Guardar en Deezer" → "✓ Guardado" con color success. Sin popup modal, feedback inline.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Recomendaciones adicionales (mejoras al proyecto)</h3>
+  <div class="ux-tip"><strong>Historial básico de moods:</strong> Aunque no está en el MVP, guardar en Supabase los moods capturados permite en Fase 2 mostrar un "diario emocional" — diferenciador enorme.</div>
+  <div class="ux-tip"><strong>Nombre personalizado para la playlist:</strong> Permitir que el usuario edite el nombre antes de guardar en Deezer. Costo bajo, valor percibido alto.</div>
+  <div class="ux-tip"><strong>Modo claro:</strong> Definir desde el MVP, no dejarlo para después. Intercambia los valores: bg-base → #F8F7FF, surface → #EEEDFA, texto primario → #111019. El acento púrpura funciona igual en ambos modos.</div>
+  <div class="ux-tip"><strong>Preview antes de guardar:</strong> Mostrar un player mock de los primeros 30 segundos (si la API de Deezer lo permite) antes de guardar. Aumenta confianza y engagement.</div>
+  <div class="ux-tip"><strong>Error handling emocional:</strong> Si la generación falla, el mensaje de error debe seguir el tono empático: "Algo salió mal, pero seguimos aquí. Intenta de nuevo." No mensajes técnicos al usuario.</div>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('#nav .nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function showScreen(id) {
+    ['landing','auth','deezer','mood','result'].forEach(s => {
+      const el = document.getElementById('scr-' + s);
+      if (el) el.style.display = s === id ? 'block' : 'none';
+    });
+    document.querySelectorAll('#screen-tabs .nav-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  document.querySelectorAll('.mood-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      this.classList.toggle('selected');
+    });
+  });
+</script>

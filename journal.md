@@ -25,6 +25,26 @@ Entradas más recientes van arriba.
 
 ---
 
+## 2026-04-13 — Implementación de la página de inicio (Home)
+
+**Decisiones tomadas:**
+- Se creó el componente `Home` con el botón de login de Deezer.
+- Se mantuvieron estilos sencillos (CSS clásico) y se limpiaron los de Vite para mantener claridad.
+- No se introdujo `react-router-dom` en este paso; la redirección a Deezer OAuth se hace vía `window.location.href`.
+
+**Atajos / cosas que funcionaron bien:**
+- Usar `VITE_API_URL` directo desde `import.meta.env` para redireccionar al backend evita exponer la lógica de auth en el front.
+
+**Riesgos abiertos:**
+- Necesitaremos manejar el callback de Deezer en el frontend una vez que redirija de vuelta.
+- Estado global pendiente de definir (Zustand vs Local State).
+
+**Para la próxima sesión:**
+- Implementar el manejo del callback de OAuth en el frontend.
+- Crear el componente para la captura del mood.
+
+---
+
 ## 2026-03-23 — Setup inicial del vault
 
 **Decisiones tomadas:**

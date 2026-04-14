@@ -14,6 +14,18 @@
 - Un componente por archivo
 - Props tipadas con TypeScript
 
+## Design system (obligatorio)
+- Fuente de verdad UI: `moodstream_design_proposal.html` (en la raíz del vault Moodstream)
+- Tipografía:
+  - Títulos emocionales: DM Serif Display (`--font-serif`)
+  - UI / cuerpo: DM Sans (`--font-sans`)
+- Estilo visual: Liquid Dark Ambient (fondo casi negro, superficies en capas, acento púrpura)
+- Tokens CSS: se definen y mantienen en `frontend/src/index.css` (no duplicar tokens en cada componente)
+- Componentes base CSS:
+  - Botones: `.btn` + variantes `.btn--primary` / `.btn--ghost` / `.btn--deezer` y tamaño `.btn--sm`
+  - Cards: `.card` y `.card--sm`
+- Accesibilidad: focus visible con `box-shadow 0 0 0 3px ...` y soporte `prefers-reduced-motion`
+
 ## UX / mood
 - El flujo de captura de mood es el core de la app — priorizar claridad sobre estética
 - No bloquear UI durante llamadas a Deezer, siempre mostrar loading state

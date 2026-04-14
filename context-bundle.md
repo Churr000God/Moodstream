@@ -139,45 +139,21 @@ Entradas más recientes van arriba.
 
 ---
 
-### ULTIMO LOG: 2026-03-23-setup-ok.md
+### ULTIMO LOG: sessions.md
 
-# Log — 2026-03-23 — Setup vault — ✅ ok
-**Sesión con:** Claude (Cowork)
-**Objetivo:** Crear vault Obsidian como fuente de verdad del proyecto.
+# Sessions — Moodstream
 
-## ✅ Completado
-- Estructura vault: specs/, decisions/, logs/, backlog/, playbooks/
-- 000-README.md con instrucciones para agentes
-- specs/DDP-v1.1.md, oauth-deezer.md, db-schema.md
-- ADR-2026-03-22-stack.md
-- Templates ADR y log
-- backlog/roadmap.md (4 sprints hasta mayo)
-- playbooks/session-start.md
+Tabla de sesiones activas y cerradas. Actualizar al inicio y al cierre de cada sesión.
 
-## 📌 Próxima sesión
-- [ ] Scaffolding repo frontend + backend
-- [ ] Decidir Zustand vs Redux → ADR
-- [ ] Registrar app en Deezer Developers
+| ID | Agente | Tarea | Estado | Próximo paso | Fecha |
+|----|--------|-------|--------|--------------|-------|
+| s-001 | — | Sprint 0: repo + scaffolding | ⏳ pendiente | crear repo, registrar app Deezer | — |
 
-
----
-
-### specs/db-schema.md
-
-# Esquema BD — Supabase (Postgres) MVP
-
-## Tablas
-users            → id, email, deezer_id, deezer_username, created_at
-deezer_tokens    → id, user_id (FK), access_token_encrypted (AES-256), created_at
-playlists        → id, user_id, mood_text, intention (expresar|superar), emotion_tags[], tracks (JSONB), deezer_playlist_id, saved_to_deezer, created_at
-mood_logs        → id, user_id, playlist_id, mood_text, intention, emotion_tags[], created_at [insertar desde MVP, usar en Fase 2]
-
-## Cuota diaria (RN02)
-SELECT COUNT(*) FROM playlists WHERE user_id=$1 AND created_at >= NOW() - INTERVAL 24h
-Si >= 5 → rechazar con 429
-
-## RLS
-Habilitar en todas las tablas. Backend usa SERVICE_KEY (bypass). Frontend usa anon key (respeta RLS).
+## Estados
+- ⏳ pendiente
+- 🔄 activo
+- ✅ done
+- 🚧 bloqueado
 
 
 ---
@@ -205,48 +181,4 @@ React · Node.js · Supabase (Postgres) · VPS · API Deezer (OAuth + playlists)
 
 ## Fase 2 (fuera del MVP)
 RF07 Compartir link · RF08 Regenerar · RF09 Analytics · Panel admin
-
-
----
-
-### specs/oauth-deezer.md
-
-# Flujo OAuth Deezer
-⚠️ Deezer NO tiene refresh token. Detectar 401 → redirigir a re-auth.
-
-## Endpoints
-GET  /deezer/oauth/start      → redirige a Deezer con perms: basic_access,email,manage_library
-GET  /deezer/oauth/callback   → intercambia code por token → cifra con AES-256 → guarda en deezer_tokens
-
-## Crear playlist
-POST https://api.deezer.com/user/{id}/playlists   → crea
-POST https://api.deezer.com/playlist/{id}/tracks  → agrega tracks
-
-## Variables requeridas
-DEEZER_APP_ID · DEEZER_SECRET · DEEZER_REDIRECT_URI · ENCRYPTION_KEY (32 chars)
-
-## Pendientes
-- [ ] Re-autenticación silenciosa al detectar 401
-- [ ] Política de limpieza de tokens antiguos
-
-
----
-
-### decisions/ADR-2026-03-22-stack.md
-
-# ADR-2026-03-22 — Stack tecnológico
-**Estado:** Aceptado | **Área:** Frontend · Backend · BD · Infra
-
-## Decisión
-React + Vite · Node.js + Express · Supabase · Zustand · VPS
-
-## Por qué no otras opciones
-- Next.js: innecesario para MVP SPA; considerar en Fase 2 si se necesita SSR
-- Firebase: Supabase tiene SQL real, RLS nativo, open-source
-- Serverless: VPS da más control sobre tokens cifrados y callbacks OAuth
-
-## Pendientes
-- [ ] Zustand vs Redux → crear ADR
-- [ ] Prisma vs consultas directas Supabase
-- [ ] SSL en VPS (Let's Encrypt)
 

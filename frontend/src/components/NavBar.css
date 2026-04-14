@@ -1,0 +1,65 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-nav-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 0.5px solid var(--color-nav-border);
+}
+
+.navbar__inner {
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1100px, 100% - (var(--space-6) * 2));
+  margin: 0 auto;
+}
+
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-nav-text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.navbar__brand:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus);
+  border-radius: var(--radius-pill);
+}
+
+.navbar__brandIcon {
+  width: 26px;
+  height: 26px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: var(--bg0);
+  box-shadow: 0 8px 24px rgba(139, 111, 232, 0.22);
+}
+
+.navbar__brandText {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+@media (max-width: 520px) {
+  .navbar__inner {
+    width: calc(100% - (var(--space-4) * 2));
+  }
+
+  .navbar__brandText {
+    font-size: var(--font-size-2);
+  }
+}
