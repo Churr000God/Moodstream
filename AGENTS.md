@@ -4,6 +4,7 @@
 - Lee `specs/DDP-v1.1.md` antes de cualquier tarea.
 - Para OAuth: lee `specs/oauth-deezer.md`.
 - Para base de datos: lee `specs/db-schema.md`.
+- Para UI/UX frontend: sigue `moodstream_design_proposal.html` como design system obligatorio.
 - No implementes funcionalidades fuera del DDP sin aprobación explícita del usuario.
 
 ## Scope MVP — no salgas de esto
