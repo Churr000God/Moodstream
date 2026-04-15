@@ -10,21 +10,21 @@ phases:
     commands:
       - cd frontend
       - npm ci
+
   pre_build:
     commands:
       - npm run lint
       - npm run typecheck
+
   build:
     commands:
       - npm run build
-      - cd ..
-      - docker build -t moodstream-frontend-img ./frontend
 
 artifacts:
+  base-directory: frontend/dist
   files:
-    - frontend/dist/**/*
+    - '**/*'
 
 cache:
   paths:
     - /root/.npm/**/*
-
