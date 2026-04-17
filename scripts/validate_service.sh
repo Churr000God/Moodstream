@@ -8,12 +8,43 @@ export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-moodstream}"
 
 mkdir -p "$LOG_DIR"
 
+ensure_compose() {
+  if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
+    COMPOSE=(docker compose)
+    return 0
+  fi
+
+  if command -v docker-compose >/dev/null 2>&1; then
+    COMPOSE=(docker-compose)
+    return 0
+  fi
+
+  if command -v apt-get >/dev/null 2>&1; then
+    apt-get update -y
+    apt-get install -y docker-compose-plugin || apt-get install -y docker-compose
+  elif command -v dnf >/dev/null 2>&1; then
+    dnf install -y docker-compose-plugin || dnf install -y docker-compose
+  elif command -v yum >/dev/null 2>&1; then
+    yum install -y docker-compose-plugin || yum install -y docker-compose
+  else
+    return 1
+  fi
+
+  if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
+    COMPOSE=(docker compose)
+    return 0
+  fi
+
+  if command -v docker-compose >/dev/null 2>&1; then
+    COMPOSE=(docker-compose)
+    return 0
+  fi
+
+  return 1
+}
+
 COMPOSE=()
-if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
-  COMPOSE=(docker compose)
-elif command -v docker-compose >/dev/null 2>&1; then
-  COMPOSE=(docker-compose)
-fi
+ensure_compose || true
 
 if [ ! -f "$APP_DIR/docker-compose.yml" ]; then
   echo "No se encontró docker-compose.yml en $APP_DIR"
