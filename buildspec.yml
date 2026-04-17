@@ -8,8 +8,7 @@ phases:
     runtime-versions:
       nodejs: 20
     commands:
-      - cd frontend
-      - npm ci
+      - npm ci --no-audit --no-fund
 
   pre_build:
     commands:
@@ -19,9 +18,15 @@ phases:
   build:
     commands:
       - npm run build
+      - chmod 755 scripts/*.sh || true
+      - rm -rf deploy
+      - mkdir -p deploy
+      - tar -czf deploy.tgz --exclude='*/node_modules' --exclude='node_modules' --exclude='.git' appspec.yml docker-compose.yml scripts backend frontend
+      - tar -xzf deploy.tgz -C deploy
+      - rm deploy.tgz
 
 artifacts:
-  base-directory: frontend/dist
+  base-directory: deploy
   files:
     - '**/*'
 

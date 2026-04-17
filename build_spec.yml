@@ -8,7 +8,6 @@ phases:
     runtime-versions:
       nodejs: 20
     commands:
-      - cd frontend
       - npm ci --no-audit --no-fund
   pre_build:
     commands:
@@ -17,12 +16,17 @@ phases:
   build:
     commands:
       - npm run build
-      - cd ..
-      - docker build -t moodstream-frontend-img ./frontend
+      - chmod 755 scripts/*.sh || true
+      - rm -rf deploy
+      - mkdir -p deploy
+      - tar -czf deploy.tgz --exclude='*/node_modules' --exclude='node_modules' --exclude='.git' appspec.yml docker-compose.yml scripts backend frontend
+      - tar -xzf deploy.tgz -C deploy
+      - rm deploy.tgz
 
 artifacts:
+  base-directory: deploy
   files:
-    - frontend/dist/**/*
+    - '**/*'
 
 cache:
   paths:
